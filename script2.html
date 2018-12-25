@@ -1,0 +1,217 @@
+<meta charset="utf-8">
+<script>
+
+//Задание 1
+//Почему код даёт именно такие результаты? 
+
+var a = 1, b = 1, c, d;
+//сначала увеличивается значение a=a+1=2 (префиксный инкремент), затем оно присваивается с=2
+c = ++a; alert(c); // 2
+//для присваивания d=1 возвращается исходное значение b=1 (постфиксный инкремент), затем оно увеличивается b=b+1=2 
+d = b++; alert(d); // 1
+//при сложении первым аргументом является 2, 
+//вторым - возвращенное увеличенное значение (префиксный инкремент) a=a+1=3 (в строке 9 стало a=2)
+c = (2+ ++a); alert(c); // 5
+//при сложении первым аргументом является 2,
+//вторым - возвращенное исходное значение b (в строке 11 стало b=2), затем b=b+1=3
+d = (2+ b++); alert(d); // 4
+//значение a увеличивалось с помощью операции инкремента на строках 9 и 14
+alert(a); // 3
+//значение b увеличивалось с помощью операции инкремента на строках 11 и 17
+alert(b); // 3
+
+//Задание 2
+//Чему будет равен x в примере ниже?  
+var e = 2;
+//сначала выполняется выражение в скобках (e*2=2*2=4), аргументами в сложении являются 1 и 4
+var x = 1+(e*=2);
+alert(x); //5
+
+//Задание 3
+/*
+Объявить две целочисленные переменные a и b и задать им произвольные начальные значения.
+Затем написать скрипт, который работает по следующему принципу: 
+- если a и b положительные, вывести их разность;
+- если а и b отрицательные, вывести их произведение;
+- если а и b разных знаков, вывести их сумму; 
+ноль можно считать положительным числом. 
+
+var a = 4;
+var b = 6;
+
+if (a>=0 && b>=0){
+	if (a>=b) console.log(a-b);
+	if (b>a) console.log(b-a);
+}
+
+if (a<0 && b<0){
+	alert (a*b);
+}
+
+if ((a>=0 && b<0)||(a<0 && b>=0)){
+	alert (a+b);
+}
+*/
+//Задание 4
+/*
+Присвоить переменной а значение в промежутке [0..15].
+С помощью оператора switch организовать вывод чисел от a до 15. 
+
+var a = 6;
+
+switch (a){
+	case 0: document.write(0+"</br>");
+	case 1: document.write(1+"</br>");
+	case 2: document.write(2+"</br>");
+	case 3: document.write(3+"</br>");
+	case 4: document.write(4+"</br>");
+	case 5: document.write(5+"</br>");
+	case 6: document.write(6+"</br>");
+	case 7: document.write(7+"</br>");
+	case 8: document.write(8+"</br>");
+	case 9: document.write(9+"</br>");
+	case 10: document.write(10+"</br>");
+	case 11: document.write(11+"</br>");
+	case 12: document.write(12+"</br>");
+	case 13: document.write(13+"</br>");
+	case 14: document.write(14+"</br>");
+	case 15: document.write(15+"</br>");
+		break;
+	default: document.write("Значение переменной должно быть в промежутке [0..15]");
+}
+
+*/
+//Задание 5
+/*
+Реализовать основные 4 арифметические операции в виде функций с двумя параметрами.
+Обязательно использовать оператор return. 
+
+
+function sum(x,y){
+	return x+y;
+}
+
+function mult(x,y){
+	return x*y;
+}
+
+function subt(x,y){
+	return x-y;
+}
+
+function divis(x,y){
+	return x/y;
+}
+*/
+/*
+alert("Сумма "+ sum(6,-8));
+alert("Умножение " + mult(5,6));
+alert("Вычитание " + subt(7,-7));
+alert("Деление " + divis(5,3));
+*/
+//Задание 6
+/*
+Реализовать функцию с тремя параметрами: function mathOperation(arg1, arg2, operation),
+где arg1, arg2 – значения аргументов, operation – строка с названием операции.
+В зависимости от переданного значения операции выполнить одну из арифметических операций
+(использовать функции из пункта 5) и вернуть полученное значение (использовать switch).
+
+function mathOperation(arg1, arg2, operation){
+	switch (operation){
+		case "+": alert("Складываем " + arg1 + " " + operation + " " + arg2 + " = " + sum(arg1,arg2));
+				break;
+		case "-": alert("Вычитаем " + arg1 + " " + operation + " " + arg2 + " = " + subt(arg1,arg2));
+				break;
+		case "*": alert ("Умножаем " + arg1 + " " + operation + " " + arg2 + " = " + mult(arg1,arg2));
+				break;
+		case "/": alert ("Делим " + arg1 + " " + operation + " " + arg2 + " = " + divis(arg1,arg2));
+				break;
+	}
+}
+mathOperation(4,6,"+");
+mathOperation(0,6,"-");
+mathOperation(4,-7,"*");
+mathOperation(2,10,"/");
+*/
+//Задание 7
+/*
+Сравнить null и 0. Попробуйте объяснить результат. 
+
+В арифметических операциях null ведет себя как 0, но не является числом.
+Null не равен 0. Не больше и не меньше 0. Но результат сравнения null>=0 null<=0 истиннен.
+Такой результат объясняется работой 11.8.5 Алгоритма сравнения абстрактного отношения (п.3.l) при выполнении
+операторов '11.8.4 Больше или равно'(п.6) и '11.8.3 Меньше или равно'(п.6) согласно спецификации "ECMAScript 5.1.
+И в том, и в другом сравнении ключевым является результат абстрактного сравнения отношения null<0 (false)"
+
+console.log("null>0?");
+console.log(null>0);
+console.log("null>=0?");
+console.log(null>=0);
+console.log("null<0?");
+console.log(null<0);
+console.log("null<=0?");
+console.log(null<=0);
+console.log("null равно 0?");
+console.log(null==0);
+console.log("null строго равно 0?");
+console.log(null===0);
+console.log("null не равно 0?");
+console.log(null!==0);
+console.log("null равно null?");
+console.log(null==null);
+console.log("null + 1?");
+console.log(null+1);
+console.log("0 + 1?");
+console.log(0+1);
+console.log("null - 1?");
+console.log(null-1);
+console.log("0 - 1?");
+console.log(0-1);
+console.log("null * 1?");
+console.log(null*1);
+console.log("0 * 1?");
+console.log(0*1);
+console.log("null / 1?");
+console.log(null/1);
+console.log("0 / 1?");
+console.log(0/1);
+console.log("1 / null?");
+console.log(1/null);
+console.log("1 / 0?");
+console.log(1/0);
+console.log("null % 1?");
+console.log(null%1);
+console.log("0 % 1?");
+console.log(0%1);
+console.log("parseInt(null)");
+console.log(parseInt(null));
+console.log("parseInt(0)");
+console.log(parseInt(0));
+console.log("parseInt('null')");
+console.log(parseInt("null"));
+console.log("parseInt('0')");
+console.log(parseInt("0"));
+*/
+//Задание 8
+/*
+С помощью рекурсии организовать функцию возведения числа в степень.
+Формат: function power(val, pow), где val – заданное число, pow – степень
+
+function power(val, pow){
+	if (pow==0) return 1;
+	if (pow==1) return val;
+	return power(val,pow-1)*val;
+}
+
+alert(power(2,5));
+
+//Функция возведения в отрицательную степень
+function powerDown(val, pow){
+	if (pow==0) return 1;
+	if (pow==1) return val;
+	return powerDown(val,pow+1)*(1/val);
+}
+
+alert(powerDown(2,-3));
+*/
+</script>

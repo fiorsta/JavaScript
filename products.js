@@ -1,0 +1,18 @@
+var products=[
+	1,
+	{name:'product1',
+	price: 100,
+	imagePic:'img/products/product1.jpg'},
+	{name:'product2',
+	price: 150,
+	imagePic:'img/products/product2.jpg'},
+	{name:'product3',
+	price: 200,
+	imagePic:'img/products/product3.jpg'},
+	{name:'product4',
+	price: 250,
+	imagePic:'img/products/product4.jpg'},
+	{name:'product5',
+	price: 300,
+	imagePic:'img/products/product5.jpg'},
+];

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Basket products</title>
+	<script src="products.js"></script>
+	<style>
+	img{
+		width:200px;
+		height:200px;
+	}
+	.products{
+		display:flex;
+		justify-content:space-around;
+		align-content:center;
+		flex-flow:row wrap;
+	}
+	.product{
+		width:200px;
+		height:auto;
+		margin-top:20px;
+		margin-bottom:20px;
+		display:flex;
+		flex-flow:column wrap;
+		justify-content:center;
+		align-items:center;
+	}
+	#basket{
+		width:300px;
+		margin:0 auto;
+		border:1px solid black;
+		text-align:left;
+	}
+	.buyIt{
+		width:80px;
+		height:30px;
+	}
+	</style>
+</head>
+<body>
+
+	<table id="basket">
+		<caption>Корзина</caption>
+		<tr>
+			<td>Итого:</td>
+			<td id="total">0</td>
+		</tr>
+	</table>
+	<div class="products">
+	<div id="1" class="product">
+		<span></span>
+		<img src="">
+		<span></span>
+		<input class="buyIt" type="button" value="Купить">
+	</div>
+	<div id="2" class="product">
+		<span></span>
+		<img src="">
+		<span></span>
+		<input class="buyIt" type="button" value="Купить">
+	</div>
+	<div id="3" class="product">
+		<span></span>
+		<img src="">
+		<span></span>
+		<input class="buyIt" type="button" value="Купить">
+	</div>
+	<div id="4" class="product">
+		<span></span>
+		<img src="">
+		<span></span>
+		<input class="buyIt" type="button" value="Купить">
+	</div>
+	<div id="5" class="product">
+		<span></span>
+		<img src="">
+		<span></span>
+		<input class="buyIt" type="button" value="Купить">
+	</div>
+	</div>
+<script>
+getProducts();
+var buyButton = document.getElementsByClassName("buyIt"); //обработчик на кнопки
+for(var i=0; i<buyButton.length; i++){
+	buyButton[i].addEventListener('click',sumBasket);
+}
+
+function sumBasket(event){ 
+	var buyItNow = products[event.target.parentNode.id]; //определить продукт
+	//console.log(buyItNow);
+	var basket=document.getElementById("basket");//корзина
+	var stringsBasket = document.getElementsByTagName("tr"); //массив строк корзины
+	var getIt=false; // товара в корзине нет
+		
+	for(var i=0; i<stringsBasket.length-1; i++){//есть ли в корзине такой товар
+		var nameTd = basket.rows[i].cells[0].innerText;
+		if (nameTd==buyItNow.name){ //если есть, увеличиваем сумму в соответствующей ячейке
+			var sumTd = parseInt(basket.rows[i].cells[1].innerText);
+			sumTd+= buyItNow.price;
+			basket.rows[i].cells[1].innerText=sumTd;
+			getIt=true; //товар есть, новую строку создавать не надо
+		}
+	}
+	
+	if (!getIt){ //если товара с таким названием нет, создаем строку в корзине
+		var newStringBasket = basket.insertRow(stringsBasket.length-1);
+		var newNameBasket = newStringBasket.insertCell(0);
+			newNameBasket.innerText = buyItNow.name;
+		var newPriceBasket = newStringBasket.insertCell(1);
+			newPriceBasket.innerText = buyItNow.price;
+	}
+	
+	var totalTd=document.getElementById("total"); //общая сумма
+	var sum=0; //cчитаем общую сумму товаров в корзине
+	for(var i=0; i<stringsBasket.length-1; i++){
+		var currentSum = parseInt(basket.rows[i].cells[1].innerText);
+			sum+=currentSum;
+		}
+	totalTd.innerText=sum;
+}
+
+function getProducts(){ //заполним продуктами
+var productsDiv = document.getElementsByClassName("product"); 
+
+for(var i=0; i<productsDiv.length; i++){
+	var productName = productsDiv[i].getElementsByTagName("span");
+	productName[0].innerText = products[i+1].name;
+	
+	var productPrice = productsDiv[i].getElementsByTagName("span");
+	productPrice[1].innerText = products[i+1].price + " rub";
+	
+	var productPic = productsDiv[i].getElementsByTagName("img");
+	productPic[0].setAttribute('src',products[i+1].imagePic);
+}
+}
+
+</script>
+</body>
+</html>

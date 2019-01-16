@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Image Gallery</title>
+	<style>
+		#image_1,
+		#image_2,
+		#image_3,
+		#image_4{
+			width:300px;
+			height:200px;
+		}
+		#big_image img{
+			width:600px;
+			height:400px;
+		}
+		.noFindImage{
+			width:600px;
+			height:400px;
+			margin:0 auto;
+			text-align:center;
+			line-height:100px;
+			color:blue;
+			background-image:url(img/error.jpg);
+			background-size:cover;
+			border-bottom: 4px solid white;
+		}
+		.findImage{
+			text-align:center;
+		}
+	</style>
+	
+</head>
+<body>
+<div id="big_image"></div>
+	<div id="gallery">
+		<img id="image_1" src="img/small/1.jpg">
+		<img id="image_2" src="img/small/2.jpg">
+		<img id="image_3" src="img/small/3.jpg">
+		<img id="image_4" src="img/small/4.jpg"> 
+	</div>
+	<script>
+			//function init(){
+			var image = document.getElementsByTagName("img"); //получить массив мини-картинок
+			for(var i=0; i<image.length; i++){	//каждой картинке присвоить функцию-обработчик на событие "click"
+				image[i].onclick = changeBigPicture;
+			}
+		//}
+
+		function changeBigPicture(eventObj){
+			console.log(eventObj);
+			var appDiv = document.getElementById("big_image"); //получить div для большой картинки
+			appDiv.innerHTML = ""; //очистить полученный div
+			var eventElement = eventObj.target; //определить источник-картинку события click
+			var imageNameParts = eventElement.id.split("_"); //разбить имя-id источника на массив слов
+			var src="img/big/" + imageNameParts[1] + ".jpg"; //создать путь к большой картинке
+			var imageDomElement = document.createElement("img"); //создать новый элемент
+			imageDomElement.src = src; //определить путь к картинке
+			imageDomElement.onerror = getTextError; //если картинка не найдена
+			appDiv.className="findImage";
+			appDiv.appendChild(imageDomElement); //добавить в div загруженную картинку
+		}
+		
+		function getTextError(){
+			var textDomElement = document.createTextNode("Ошибка! Файл не найден");
+			var appDiv = document.getElementById("big_image");
+			appDiv.innerHTML = "";
+			appDiv.className="noFindImage";
+			appDiv.appendChild(textDomElement);
+		}
+		
+		//document.onload = init; //выполнить функцию после загрузки страницы
+	</script>
+</body>
+</html>

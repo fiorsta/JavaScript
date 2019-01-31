@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="menu"></div>
+<button>Delete</button>
+<div id="subMenu"></div>
+
+<script src="MenuItem.js"></script>
+<script src="Menu.js"></script>
+<script src="SubMenu.js"></script>
+<script>
+    window.onload = () => {
+        let block = document.getElementById('menu');
+
+        let menu = new Menu('my', 'my', [
+            new MenuItem('/', 'Menu'),
+            new MenuItem('/about', 'About'),
+            new MenuItem('/services', 'Services'),
+            new MenuItem('/info', 'info'),
+        ]);
+
+        block.innerHTML = menu.render();
+		
+		//Задание 1. Удаление элемента <ul>
+		let button = document.querySelector("button");
+	
+		button.addEventListener("click", function(){
+			menu.removed();
+			console.log(menu);//существует в памяти, из DOM удалено
+		});
+		
+		//Задание 2. Создание меню с подменю
+		let blockSub = document.getElementById('subMenu');
+
+        let subMenu = new Menu('myMenu', 'myMenu', [
+            new MenuItem('/', 'Menu'),
+            new MenuItem('/about', 'About'),
+			new SubMenu('mySub', 'mySub', [
+				new MenuItem('/us', 'Us'),
+				new MenuItem('/you', 'You'),
+			]),
+            new MenuItem('/services', 'Services'),
+            new MenuItem('/info', 'Info'),
+        ]);
+		
+		blockSub.innerHTML = subMenu.render();
+    }
+
+</script>
+</body>
+</html>

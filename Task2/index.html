@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <input type="text" value="" id="info">
+    <button id="check">Check It!</button>
+    <div id="ajax-data"></div>
+
+    <script>
+        window.onload = () => {
+
+            //обработчик на кнопку
+            document.getElementById('check').addEventListener("click", () => {
+                let block = document.getElementById('ajax-data');
+                let info = document.getElementById('info').value;
+                if (info != "") {
+                    fetch('success.json')
+                        .then(result => result.json())
+                        .then(data => {
+                            console.log(data);
+                            block.innerHTML = `Результат ${data.result}`;
+                        })
+                        .catch(error => console.log(error));
+                } else {
+                    fetch('error.json')
+                        .then(result => result.json())
+                        .then(data => {
+                            console.log(data);
+                            block.innerHTML = `Результат ${data.result}`;
+                        })
+                        .catch(error => console.log(error));
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>

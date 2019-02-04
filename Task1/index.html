@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Title</title>
+</head>
+
+<body>
+    <header>
+       <img id="logo" src="img/logo.jpg" alt="logo">
+        <nav id="menu"></nav>
+        <!--<a id="personal_account" href="#">Личный кабинет</a>-->
+    </header>
+    <div id="gallery"></div>
+    <script src="MenuItem.js"></script>
+    <script src="Menu.js"></script>
+    <script src="Gallery.js"></script>
+
+    <script>
+        window.onload = () => {
+            let block = document.getElementById('menu');
+
+            let menu = new Menu('my', 'my', [
+                new MenuItem('#', 'Home'),
+                new SubMenu('#', 'Catalog', 'mySub', 'mySub', [
+                    new MenuItem('#', 'Harley'),
+                    new MenuItem('#', 'Other'),
+                ]),
+                new MenuItem('#', 'Services'),
+                new MenuItem('#', 'Info'),
+            ]);
+
+            block.innerHTML = menu.render();
+
+            //обработчик на меню
+            document.getElementById('mySub').classList.toggle('sub_menu_none');
+            document.getElementById('mySub').parentNode.addEventListener("click", () => {
+                document.getElementById('mySub').classList.toggle('sub_menu_active');
+            });
+            
+            //обработчики на картинки
+            let galleryImage = document.getElementsByClassName('small_image');
+           //console.log(galleryImage);
+            [...galleryImage].forEach(elem => {
+                console.log(elem);
+                elem.addEventListener("click", () => {
+                    elem.classList.toggle("large_image")
+                })
+            });
+        }
+
+    </script>
+</body>
+
+</html>

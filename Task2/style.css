@@ -1,0 +1,12 @@
+#myform{
+    width: 20%;
+    height: 350px;
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-flow: row wrap;
+}
+
+#message{
+    resize: none;
+}

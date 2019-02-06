@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Form</title>
+</head>
+
+<body>
+    <form action="#" method="post" id="myform">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required>
+        <!--<span id="name-format" class="help">Format: Name</span>-->
+        <label for="phone">Телефон:</label>
+        <input type="tel" id="phone" name="phone" required>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="message">Сообщение:</label>
+        <textarea name="message" id="message" cols="40" rows="6" required></textarea>
+        <button id="btn-send" type="submit">Отправить</button>
+    </form>
+    <script>
+        window.onload = () => {
+
+            let name = document.getElementById("name");
+            name.addEventListener('change', () => {
+                if (/^[a-zа-яё]{2,30}$/i.test(name.value)) {
+                    name.setCustomValidity("");
+                    name.style.border = "1px solid green";
+                } else {
+                    console.log(name.value);
+                    name.setCustomValidity("Имя должно содержать только буквы");
+                    name.style.border = "1px solid red";
+                }
+            }, false);
+            
+            let phone = document.getElementById("phone");
+            phone.addEventListener('change', () => {
+                if (/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/.test(phone.value)) {
+                    phone.setCustomValidity("");
+                    phone.style.border = "1px solid green";
+                } else {
+                    console.log(phone.value);
+                    phone.setCustomValidity("Номер телефона содержит 11 цифр");
+                    phone.style.border = "1px solid red";
+                }
+            }, false);
+
+            let email = document.getElementById("email");
+            email.addEventListener('change', () => {
+                if (/^([a-zA-Z0-9\.\-_]+)@([a-zA-Z]{2,})\.([a-zA-Z]{2,})$/.test(email.value)) {
+                    email.setCustomValidity("");
+                    email.style.border = "1px solid green";
+                } else {
+                    console.log(email.value);
+                    email.setCustomValidity("E-mail в формате mymail@mail.ru, my.mail@mail.ru, my-mail@mail.ru");
+                    email.style.border = "1px solid red";
+                }
+            }, false);
+            
+            let message = document.getElementById("message");
+            message.addEventListener('change', () => {
+                if (/^[^\<\>\[\]%\&'`]+$/.test(message.value)) {
+                    message.setCustomValidity("");
+                    message.style.border = "1px solid green";
+                } else {
+                    console.log(message.value);
+                    message.setCustomValidity("Сформулируйте свою мысль, не используя символы &, %, <, /, >, ^, ', `");
+                    message.style.border = "1px solid red";
+                }
+            }, false);
+
+            function validateInput(nameInput) {
+                switch (nameInput) {
+                    case 'name':
+                        {
+                            if (/^[a-zа-яё]{2,30}$/i.test(document.getElementById("name").value)) return true;
+                            break;
+                        }
+                    case 'phone':
+                        {
+                            if (/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/.test(document.getElementById("phone").value)) return true;
+                            break;
+                        }
+                    case 'email':
+                        {
+                            if (/^([a-zA-Z0-9\.\-_]+)@([a-zA-Z]{2,})\.([a-zA-Z]{2,})$/.test(document.getElementById("email").value)) return true;
+                            break;
+                        }
+                    case 'message':
+                        {
+                            if (/^[^\<\>\[\]%\&'`]+$/.test(document.getElementById("message").value)) return true;
+                            break;
+                        }
+                    default:
+                        return false;
+                }
+
+            }
+
+            function validateForm() {
+                if ((validateInput("name")) && (validateInput("phone")) && (validateInput("email")) && (validateInput("message")))
+                    return true;
+                else return false;
+            }
+
+            document.getElementById('myform').addEventListener('submit', e => {
+                e.preventDefault(); // отмена отправки формы
+                if (validateForm()) {
+                    document.getElementById('myform').submit();
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>

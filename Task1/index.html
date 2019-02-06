@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Regular Expression</title>
+</head>
+
+<body>
+    <div id="text">
+        One: 'Hi Mary.'<br>
+        Two: 'Oh, hi.'<br>
+        One: 'How are you doing?'<br>
+        Two: 'I'm doing alright. How about you?'<br>
+        One: 'Not too bad. The weather is great isn't it?'<br>
+        Two: 'Yes. It's absolutely beautiful today.'<br>
+        One: 'I wish it was like this more frequently.'<br>
+        Two: 'Me too.'<br>
+        One: 'So where are you going now?'<br>
+        Two: 'I'm going to meet a friend of mine at the department store.'<br>
+        One: 'Going to do a little shopping?'<br>
+        Two: 'Yeah, I have to buy some presents for my parents.'<br>
+        One: 'What's the occasion?'<br>
+        Two: 'It's their anniversary.'<br>
+        One: 'That's great. Well, you better get going. You don't want to be late.'<br>
+        Two: 'I'll see you next time.'<br>
+        One: 'Sure. Bye.'<br>
+    </div>
+    1. <button id="replaceText">Заменить все кавычки</button><br><br>
+    <button id="returnFirstText">Исходный текст</button><br><br>
+    2. <button id="replaceRightText">Заменить только нужные кавычки</button><br>
+
+    <script>
+        window.onload = () => {
+            const text = document.getElementById("text").innerText; //исходный текст
+
+            document.getElementById("replaceText").addEventListener("click", () => {
+                let replaceText = text.replace(/\'/gm, '\"'); //замена всех найденных одинарных кавычек двойными
+                document.getElementById("text").innerText = replaceText;
+            }, false);
+
+            document.getElementById("returnFirstText").addEventListener("click", () => {
+                document.getElementById("text").innerText = text;
+            }, false);
+
+            document.getElementById("replaceRightText").addEventListener("click", () => {
+                let replaceText = text.replace(/\B\'/gm, '\"'); //замена найденных одинарных кавычек двойными,кроме тех которые в слове
+                document.getElementById("text").innerText = replaceText;
+            }, false);
+        }
+
+    </script>
+</body>
+
+</html>

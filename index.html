@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product Cart</title>
+    <style>
+        #cart {
+            max-width: 300px;
+        }
+        .cart-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr;
+            padding: 10px 0;
+        }
+        .cart-item:not(:first-child) {
+            border-top: 1px solid black;
+        }
+        .cart-items-wrap {
+            margin: 20px 0;
+        }
+        .cart-summary,
+        .product-price {
+            text-align: right;
+        }
+        .del-btn{
+            width: 15px;
+            height: 15px;
+            padding: 0;
+            margin: 0 auto;
+        }
+        .product-quantity {
+            text-align: center;
+        }
+        #products {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 20px;
+        }
+        p {
+            margin: 0 0 5px 0;
+        }
+        .desc {
+            padding: 15px;
+            border: 1px solid #c0c0c040;
+        }
+        .product {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div id="cart">
+           <span>Корзина</span>
+           <div class="cart-items-wrap">
+            <cart v-for="(prod, i) of products" :prod="prod" :key="i" v-on:remove-of-cart="removeOfCart"></cart>
+            </div>
+            <div class="cart-summary sum-count">Всего товаров в корзине: {{countGoods}}</div>
+            <div class="cart-summary sum-price">Сумма товаров в корзине: {{amount}}$</div>
+        </div>
+        <div id="products">
+            <product-item v-for="(prod, i) of productsToAdd" :prod="prod" :key="i" v-on:add-to-cart="addToCart"></product-item>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="ProductComponent.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
